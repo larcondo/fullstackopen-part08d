@@ -10,7 +10,7 @@ function App() {
   const [token, setToken] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const result = useQuery(ALL_PERSONS)
-  const client = useApolloClient
+  const client = useApolloClient()
 
   if (result.loading) {
     return <div>loading...</div>
