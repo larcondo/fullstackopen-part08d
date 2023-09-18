@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useApolloClient, useQuery } from '@apollo/client'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
@@ -11,6 +11,12 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(null)
   const result = useQuery(ALL_PERSONS)
   const client = useApolloClient()
+
+  // this useEffect was added by Lucas
+  useEffect(() => {
+    const savedToken = localStorage.getItem('phonenumbers-user-token')
+    setToken( savedToken ? savedToken : null)
+  }, [])
 
   if (result.loading) {
     return <div>loading...</div>
@@ -26,7 +32,7 @@ function App() {
     setErrorMessage(message)
     setTimeout(() => {
       setErrorMessage(null)
-    }, 10000)
+    }, 5000)
   }
 
   if (!token) {
